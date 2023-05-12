@@ -1,0 +1,50 @@
+@startuml schema
+left to right direction
+Actor "Кот-тестировщик\n(клиент)" as client #blue
+Actor "Кот-воркер" as worker #green
+Actor "Менеджер" as manager #orange
+
+package "MCF - make cat free" as MCF {
+    usecase "Тестирование воркеров" as registration
+    usecase "Заявки" as requests
+    usecase "Матчинг" as matching
+    usecase "Биллинг" as billing
+    usecase "Проверка работ" as verification
+}
+
+worker --> registration: новый воркер
+client --> requests: новая заявка
+requests --> matching: анализ образцов
+registration --> matching: выбор воркеров
+
+package "Отдел сборки" as assembly {
+    usecase "Выдача расходников" as prepare #violet
+    usecase "Подготовка подарка" as gift
+}
+
+worker --> prepare: получение расходников
+
+package "Подрядчик" as contractor {
+    usecase "Выпечка печенья" as cookie #pink
+}
+
+cookie <--> gift
+gift -> prepare
+
+manager --> verification: выборочная проверка
+manager --> billing: корректировка оплаты
+
+package "Система ставок" as bet {
+    usecase "Ставки менеджеров" as onbet
+}
+
+manager --> onbet: ставка
+
+package "Уведомления" as notify {
+    usecase "Email сообщения" as email #aqua
+}
+
+MCF --> notify
+assembly --> notify
+
+@enduml

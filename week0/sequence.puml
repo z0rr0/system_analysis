@@ -1,0 +1,37 @@
+@startuml sequence
+Actor client #blue
+participant MCF #yellow
+control Billing #yellow
+queue Notification #aqua
+participant Matcher #yellow
+participant "Assembly\nDepartmen" as assembly #violet
+collections "Workers\nverification" as moderation #orange
+Actor worker #green
+participant "Gift maker" as gift #pink
+
+note over of Notification: notify every\nbase step
+client -> MCF: I want to be a client
+worker -> moderation: can I be a worker?
+moderation -> MCF: verified workers
+
+autonumber
+client -> MCF: new order
+MCF -> Matcher: reduce order
+Matcher <-- worker: history
+Matcher <-- client: template
+Matcher -> Matcher: match
+Matcher -> MCF: pair client/worker, price
+MCF -> worker: take an order
+assembly <- worker: need materials
+assembly <- gift: fut-tune cake
+assembly -> worker: materials
+worker -> MCF: start
+worker -> worker: work
+worker --> client: ready, accept?
+worker -> MCF: finish
+moderation --> worker: random verify
+moderation --> Matcher: improve matching
+MCF --> Billing: manual correction
+Billing -> client: sunday invoice, take money
+Billing -> worker: monthly invoice, give money
+@enduml

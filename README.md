@@ -1,3 +1,3 @@
-# System analysis
+# System analysis homework
 
-System analysis course notes.
+System analysis course homework notes.
