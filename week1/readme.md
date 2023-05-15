@@ -5,6 +5,8 @@
 - [PDF](./es.pdf)
 - [miro](https://miro.com/app/board/uXjVP3cbcYw=/?share_link_id=182043605419)
 
+![ES](es.jpg)
+
 Логика группировки
 
 1. Административный интерфейс
